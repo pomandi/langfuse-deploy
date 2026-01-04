@@ -62,9 +62,7 @@ services:
       - "traefik.http.routers.langfuse.tls=true"
       - "traefik.http.routers.langfuse.tls.certresolver=letsencrypt"
       - "traefik.http.services.langfuse.loadbalancer.server.port=3000"
-    networks:
-      - coolify
-      - default
+      - "traefik.docker.network=coolify"
     environment:
       <<: *langfuse-env
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-langfuse-nextauth-secret-2024}
@@ -143,7 +141,3 @@ volumes:
   minio_data:
   postgres_data:
 
-networks:
-  coolify:
-    external: true
-  default:
