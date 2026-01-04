@@ -55,8 +55,6 @@ services:
         condition: service_healthy
       clickhouse:
         condition: service_healthy
-    ports:
-      - "3000:3000"
     environment:
       <<: *langfuse-env
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-langfuse-nextauth-secret-2024}
