@@ -55,6 +55,16 @@ services:
         condition: service_healthy
       clickhouse:
         condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.langfuse.rule=Host(`langfuse.pomandi.com`)"
+      - "traefik.http.routers.langfuse.entrypoints=https"
+      - "traefik.http.routers.langfuse.tls=true"
+      - "traefik.http.routers.langfuse.tls.certresolver=letsencrypt"
+      - "traefik.http.services.langfuse.loadbalancer.server.port=3000"
+    networks:
+      - coolify
+      - default
     environment:
       <<: *langfuse-env
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-langfuse-nextauth-secret-2024}
@@ -132,3 +142,8 @@ volumes:
   clickhouse_logs:
   minio_data:
   postgres_data:
+
+networks:
+  coolify:
+    external: true
+  default:
