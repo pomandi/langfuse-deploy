@@ -66,9 +66,11 @@ services:
     environment:
       <<: *langfuse-env
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-langfuse-nextauth-secret-2024}
-      # Initial admin user
+      # Initial admin user - LANGFUSE_INIT_ORG_ID required for init to work
+      LANGFUSE_INIT_ORG_ID: pomandi-claude-agents
       LANGFUSE_INIT_ORG_NAME: Pomandi
       LANGFUSE_INIT_PROJECT_NAME: Claude Agents
+      LANGFUSE_INIT_PROJECT_ID: claude-agents-prod
       LANGFUSE_INIT_USER_EMAIL: admin@pomandi.com
       LANGFUSE_INIT_USER_NAME: Admin
       LANGFUSE_INIT_USER_PASSWORD: ${ADMIN_PASSWORD:-LangfuseAdmin2024!}
